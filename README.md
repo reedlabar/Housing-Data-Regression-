@@ -15,12 +15,15 @@ from sklearn.linear_model import Ridge
 
 
 #Specify the full path to your CSV file
+
 file_name = "//Users/reedlabar/Documents/Python /Python Project (IBM Course)/kc_house_data_NaN.csv"
 
 #Load the CSV into a Pandas DataFrame
+
 df = pd.read_csv(file_name)
 
 #Display the first few rows of the DataFrame
+
 print(df.head())
 
 #Statistical Summary of the DF
@@ -29,9 +32,11 @@ df.describe()
 
 
 #Drop the columns "id" and "Unnamed: 0"
+
 df.drop(columns=["id", "Unnamed: 0"], axis=1, inplace=True)
 
 #Display the statistical summary of the data
+
 print(df.describe())
 
 ###HANDLING MISSING VALUES 
@@ -40,6 +45,7 @@ print("number of NaN values for the column bedrooms :", df['bedrooms'].isnull().
 print("number of NaN values for the column bathrooms :", df['bathrooms'].isnull().sum())
 
 #Replace the missing bedroom values with mean
+
 mean=df['bedrooms'].mean()
 df['bedrooms'] = df['bedrooms'].fillna(df['bedrooms'].mean())
 
