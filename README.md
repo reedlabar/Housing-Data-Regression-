@@ -15,31 +15,25 @@ from sklearn.linear_model import Ridge
 
 
 #Specify the full path to your CSV file
-
 file_name = "//Users/reedlabar/Documents/Python /Python Project (IBM Course)/kc_house_data_NaN.csv"
 
 #Load the CSV into a Pandas DataFrame
-
 df = pd.read_csv(file_name)
 
 #Display the first few rows of the DataFrame
-
 print(df.head())
 
 #Statistical Summary of the DF
-
 df.describe()
 
 
 #Drop the columns "id" and "Unnamed: 0"
-
 df.drop(columns=["id", "Unnamed: 0"], axis=1, inplace=True)
 
 #Display the statistical summary of the data
-
 print(df.describe())
 
-###HANDLING MISSING VALUES 
+### HANDLING MISSING VALUES 
 
 print("number of NaN values for the column bedrooms :", df['bedrooms'].isnull().sum())
 print("number of NaN values for the column bathrooms :", df['bathrooms'].isnull().sum())
@@ -56,7 +50,7 @@ df['bathrooms'].replace(np.nan,mean, inplace=True)
 print("number of NaN values for the column bedrooms :", df['bedrooms'].isnull().sum())
 print("number of NaN values for the column bathrooms :", df['bathrooms'].isnull().sum())
 
-###EXPLORATORY ANALYSIS
+### EXPLORATORY ANALYSIS
 
 #Count the number of unique floor values
 floor_counts = df['floors'].value_counts()
@@ -68,7 +62,7 @@ floor_counts_df = floor_counts.to_frame()
 print(floor_counts_df)
 
 
-#Create a regression plot for sqft_above vs. price
+# Create a regression plot for sqft_above vs. price
 plt.figure(figsize=(10, 6))
 sns.regplot(x="sqft_above", y="price", data=df, scatter_kws={"alpha": 0.5}, line_kws={"color": "red"})
 plt.title("Regression Plot: sqft_above vs. price")
@@ -76,29 +70,29 @@ plt.xlabel("Square Footage Above Ground (sqft_above)")
 plt.ylabel("House Price (price)")
 plt.show()
 
-# Drop the 'date' column from the DataFrame
+#Drop the 'date' column from the DataFrame
 df = df.drop(columns=['date'], errors='ignore')
 
 #Find feature most highly correlated to price using a correlation matrix
 
 df.corr()['price'].sort_values()
 
-###VISUALIZATION USING HEATMAP
+### VISUALIZATION USING HEATMAP
 
 #Create the correlation matrix
 correlation_matrix = df.corr()
 
-# Create a heatmap
+#Create a heatmap
 plt.figure(figsize=(12, 8))
 sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap="coolwarm", cbar=True)
 
-# Add a title to the heatmap
+#Add a title to the heatmap
 plt.title("Correlation Heatmap", fontsize=16)
 
-# Show the plot
+#Show the plot
 plt.show()
 
-###MODEL BUILDING
+### MODEL BUILDING
 #Fit model to long and price and test R^2
 X = df[['long']]
 Y = df['price']
@@ -106,12 +100,12 @@ lm = LinearRegression()
 lm.fit(X,Y)
 lm.score(X, Y)
 
-#Fit model using sqft_living
+# Fit model using sqft_living
 X = df[['sqft_living']]
 lm.fit(X,Y)
 lm.score(X,Y)
 
-#Final Model 
+# Final Model 
 x = df[["floors", "waterfront", "lat", "bedrooms", "sqft_basement", 
         "view", "bathrooms", "sqft_living15", "sqft_above", "grade", "sqft_living"]]
 y = df["price"]
@@ -129,7 +123,7 @@ pipeline = Pipeline([
 #Fit the pipeline on the training data
 pipeline.fit(x_train, y_train)
 
-#Calculate the R^2 score on the test data
+# Calculate the R^2 score on the test data
 r2 = pipeline.score(x_test, y_test)
 
 # Print the number of samples and R^2 value
