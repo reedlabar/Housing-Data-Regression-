@@ -1,6 +1,6 @@
 # Housing-Data-Regression
 
-#Import Libraries and sklearn
+# Import Libraries and sklearn
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge 
 
 
-#Specify the full path to your CSV file
+# Specify the full path to your CSV file
 file_name = "//Users/reedlabar/Documents/Python /Python Project (IBM Course)/kc_house_data_NaN.csv"
 
 #Load the CSV into a Pandas DataFrame
