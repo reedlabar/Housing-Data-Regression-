@@ -24,7 +24,7 @@ df = pd.read_csv(file_name)
 #Display the first few rows of the DataFrame
 print(df.head())
 
-#Statistical Summary of the DF
+# Statistical Summary of the DF
 df.describe()
 
 
@@ -34,7 +34,7 @@ df.drop(columns=["id", "Unnamed: 0"], axis=1, inplace=True)
 #Display the statistical summary of the data
 print(df.describe())
 
-### HANDLING MISSING VALUES 
+# Handling Missing Values 
 
 print("number of NaN values for the column bedrooms :", df['bedrooms'].isnull().sum())
 print("number of NaN values for the column bathrooms :", df['bathrooms'].isnull().sum())
@@ -51,7 +51,7 @@ df['bathrooms'].replace(np.nan,mean, inplace=True)
 print("number of NaN values for the column bedrooms :", df['bedrooms'].isnull().sum())
 print("number of NaN values for the column bathrooms :", df['bathrooms'].isnull().sum())
 
-### EXPLORATORY ANALYSIS
+# Exploratory Analysis
 
 #Count the number of unique floor values
 floor_counts = df['floors'].value_counts()
@@ -78,7 +78,7 @@ df = df.drop(columns=['date'], errors='ignore')
 
 df.corr()['price'].sort_values()
 
-### VISUALIZATION USING HEATMAP
+# Visualization Of Correlation Using Heatmap 
 
 #Create the correlation matrix
 correlation_matrix = df.corr()
@@ -93,7 +93,7 @@ plt.title("Correlation Heatmap", fontsize=16)
 #Show the plot
 plt.show()
 
-### MODEL BUILDING
+# Model Building 
 #Fit model to long and price and test R^2
 X = df[['long']]
 Y = df['price']
